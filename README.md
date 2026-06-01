@@ -53,3 +53,20 @@ npx expo start
 ## Nota sobre datos
 
 Actualmente la app usa datos mock en los hooks para funcionar sin configuración previa de backend.
+
+## Despliegue en Vercel (web)
+
+1. Crear el proyecto en Vercel importando este repositorio.
+2. Configurar:
+   - **Build Command:** `npx expo export -p web`
+   - **Output Directory:** `dist`
+   - **Install Command:** `npm install --legacy-peer-deps`
+3. Agregar en Vercel las variables:
+   - `EXPO_PUBLIC_SUPABASE_URL`
+   - `EXPO_PUBLIC_SUPABASE_ANON_KEY`
+
+Con la integración de GitHub:
+- Cada `push` a `main` publica producción automáticamente.
+- Cada pull request genera una URL de preview.
+
+Además, este repositorio incluye el workflow `.github/workflows/deploy.yml` para validar (lint/test/typecheck) en `push` y `pull_request` antes del despliegue.

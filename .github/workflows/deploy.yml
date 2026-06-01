@@ -1,0 +1,37 @@
+name: Deploy Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate before deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Lint (if script exists)
+        run: npm run lint --if-present
+
+      - name: Test (if script exists)
+        run: npm test --if-present
+
+      - name: Type check
+        run: npm run typecheck
