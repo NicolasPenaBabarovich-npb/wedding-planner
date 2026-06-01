@@ -60,7 +60,7 @@ Actualmente la app usa datos mock en los hooks para funcionar sin configuración
 2. Configurar:
    - **Build Command:** `npx expo export -p web`
    - **Output Directory:** `dist`
-   - **Install Command:** `npm install`
+   - **Install Command:** `npm install --legacy-peer-deps`
 3. Agregar en Vercel las variables:
    - `EXPO_PUBLIC_SUPABASE_URL`
    - `EXPO_PUBLIC_SUPABASE_ANON_KEY`
