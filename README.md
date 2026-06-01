@@ -69,4 +69,4 @@ Con la integración de GitHub:
 - Cada `push` a `main` publica producción automáticamente.
 - Cada pull request genera una URL de preview.
 
-Además, este repositorio incluye el workflow `/.github/workflows/deploy.yml` para validar (lint/test/typecheck) en `push` y `pull_request` antes del despliegue.
+Además, este repositorio incluye el workflow `.github/workflows/deploy.yml` para validar (lint/test/typecheck) en `push` y `pull_request` antes del despliegue.
