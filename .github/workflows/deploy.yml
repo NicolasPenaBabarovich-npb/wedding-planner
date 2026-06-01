@@ -1,0 +1,39 @@
+name: Deploy Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate before deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint (if script exists)
+        run: npm run lint --if-present
+
+      - name: Test (if script exists)
+        run: npm test --if-present
+
+      - name: Type check (if TypeScript is available)
+        run: |
+          if npm ls typescript --depth=0 >/dev/null 2>&1; then
+            npx tsc --noEmit
+          else
+            echo "TypeScript dependency not found, skipping type check."
+          fi
